@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programa de Reconhecimento em Segurança – Veracel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 4px solid transparent;
+        }
+        .nav-link.active {
+            border-bottom-color: #047857;
+            color: #064e3b;
+        }
+        .accordion-header {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .accordion-content {
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .accordion-open .accordion-content {
+            max-height: 2000px;
+        }
+        .accordion-open .chevron {
+            transform: rotate(180deg);
+        }
+        .chevron {
+            transition: transform 0.3s ease;
+        }
+    </style>
+    <!-- Chosen Palette: Calm Harmony -->
+    <!-- Application Structure Plan: A tab-based single-page application. A top navigation bar allows users to switch between main categories: "Visão Geral", "Lideranças", "Equipes Próprias", "Motoristas", and "Protagonistas". This user-centric structure allows different roles (e.g., a leader, a driver) to quickly access relevant information without scrolling through irrelevant sections. Each category is a self-contained module, using interactive accordions to present detailed criteria, which reduces cognitive load and improves usability compared to static tables. This transforms the dense report into an intuitive, explorable tool. -->
+    <!-- Visualization & Content Choices: Report Info: Program categories, criteria tables (A.1-A.12), and reward systems. -> Goal: Inform, Organize, and Engage. -> Viz/Presentation Method: Interactive accordions (HTML/JS) for all criteria tables to allow progressive disclosure. A card-based layout with Unicode icons (⭐) for the "Protagonistas" section to make it more visual. Styled info boxes (HTML/CSS) for key concepts. No charts were needed as the data is rule-based, not quantitative. -> Interaction: Click-to-navigate tabs and click-to-expand/collapse accordions. -> Justification: This structure breaks down a complex document into manageable, user-centric pieces, prioritizing usability and quick information retrieval. -> Library/Method: Vanilla JS for interactions, Tailwind CSS for styling. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div id="app" class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-emerald-900">Programa de Reconhecimento em Segurança</h1>
+            <p class="text-slate-600 mt-2">Guia Interativo da Cultura Ativa de Segurança – Veracel</p>
+        </header>
+
+        <nav class="bg-white rounded-lg shadow-md mb-8 sticky top-4 z-10">
+            <ul class="flex flex-wrap justify-center p-2">
+                <li><a href="#visao-geral" class="nav-link active font-semibold text-slate-600 py-3 px-3 sm:px-6 block">Visão Geral</a></li>
+                <li><a href="#liderancas" class="nav-link font-semibold text-slate-600 py-3 px-3 sm:px-6 block">Lideranças</a></li>
+                <li><a href="#equipes" class="nav-link font-semibold text-slate-600 py-3 px-3 sm:px-6 block">Equipes Próprias</a></li>
+                <li><a href="#motoristas" class="nav-link font-semibold text-slate-600 py-3 px-3 sm:px-6 block">Motoristas</a></li>
+                <li><a href="#protagonistas" class="nav-link font-semibold text-slate-600 py-3 px-3 sm:px-6 block">Protagonistas</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="visao-geral" class="content-section space-y-8">
+                <div>
+                    <h2 class="text-2xl font-bold text-emerald-800 mb-4">Objetivo do Programa</h2>
+                    <p class="text-slate-700 leading-relaxed bg-white p-6 rounded-lg shadow">Estabelecer diretrizes e critérios formais para o funcionamento do Programa de Reconhecimento em Segurança da Veracel, fortalecendo a cultura de segurança por meio da valorização de comportamentos seguros, do cumprimento rigoroso das normas e da promoção do protagonismo em segurança.</p>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-emerald-800 mb-4">Princípios Fundamentais</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="font-bold text-emerald-700 mb-2">Cumprimento de Normas</h3>
+                            <p class="text-slate-600 text-sm">Adesão estrita aos procedimentos e políticas de segurança.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="font-bold text-emerald-700 mb-2">Atitude Proativa</h3>
+                            <p class="text-slate-600 text-sm">Prevenção de riscos antes que se tornem incidentes.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="font-bold text-emerald-700 mb-2">Proposição de Melhorias</h3>
+                            <p class="text-slate-600 text-sm">Iniciativa para aprimorar a segurança do ambiente de trabalho.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="font-bold text-emerald-700 mb-2">Influência Positiva</h3>
+                            <p class="text-slate-600 text-sm">Inspirar e motivar colegas a adotarem comportamentos seguros.</p>
+                        </div>
+                    </div>
+                </div>
+
+                 <div>
+                    <h2 class="text-2xl font-bold text-emerald-800 mb-4">Estrutura de Avaliação e Premiação</h2>
+                    <div class="bg-white p-6 rounded-lg shadow space-y-4">
+                       <p class="text-slate-700">O programa avalia os participantes através de um sistema de pontos que considera diferentes tipos de critérios. A navegação desta página está dividida por categoria para facilitar a consulta. Cada categoria possui seus critérios específicos, que podem ser mensais, trimestrais, além de bônus por ações proativas e penalidades por não conformidades.</p>
+                       <p class="text-slate-700">Ao final do ciclo anual, os participantes com as melhores pontuações em cada categoria são premiados em eventos de reconhecimento, recebendo troféus, brindes e recompensas como o Cartão Caju, reforçando o valor que a Veracel dá ao compromisso com a segurança.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="liderancas" class="content-section hidden space-y-6">
+                 <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold text-emerald-800 mb-2">Programa para Lideranças</h2>
+                    <p class="text-slate-600">Esta seção detalha os critérios de avaliação para os gestores da Veracel (supervisores, coordenadores, gerentes). O objetivo é reconhecer o papel crucial da liderança na promoção de uma cultura de segurança ativa, avaliando seu engajamento em práticas preventivas e na gestão de suas equipes. Explore os critérios mensais e as penalidades aplicáveis abaixo.</p>
+                </div>
+                
+                <div class="accordion-container space-y-3">
+                    <h3 class="text-xl font-bold text-emerald-800 my-4">Critérios Mensais</h3>
+                    <!-- Item Accordion -->
+                    <div class="accordion-item bg-white rounded-lg shadow-sm border border-slate-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-slate-700">DDS da Liderança</span>
+                            <span class="chevron text-emerald-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Realizar 1 DDS mensal, compartilhando lições e temas críticos para fortalecer a cultura.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> 1 DDS Liderança/mês.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Pontuação:</strong> 100 Pontos.</p>
+                        </div>
+                    </div>
+                     <!-- Item Accordion -->
+                    <div class="accordion-item bg-white rounded-lg shadow-sm border border-slate-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-slate-700">Abordagem Comportamental de Segurança</span>
+                            <span class="chevron text-emerald-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Identificar riscos com observações.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> Quantidade de Abordagens conforme compromisso estabelecido (indicador SICLOPE).</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Pontuação:</strong> 100 Pontos.</p>
+                        </div>
+                    </div>
+                     <!-- Item Accordion -->
+                    <div class="accordion-item bg-white rounded-lg shadow-sm border border-slate-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-slate-700">Inspeção/Blitz de Segurança</span>
+                            <span class="chevron text-emerald-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Realizar inspeções preventivas.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> Quantidade de inspeções conforme compromisso estabelecido (indicador SICLOPE).</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Pontuação:</strong> 100 Pontos.</p>
+                        </div>
+                    </div>
+                    <!-- Item Accordion -->
+                    <div class="accordion-item bg-white rounded-lg shadow-sm border border-slate-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-slate-700">Gestão das Ações no Siclope</span>
+                            <span class="chevron text-emerald-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Garantir o monitoramento e conclusão, no prazo, de todas as ações.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> ≥ 90% das ações abertas concluídas no prazo; 100% de alto potencial sem atraso.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Pontuação:</strong> ≥ 90% = 100 Pts; 80-89% = 50 Pts; 70-79% = 25 Pts.</p>
+                        </div>
+                    </div>
+                     <!-- Item Accordion -->
+                     <div class="accordion-item bg-white rounded-lg shadow-sm border border-slate-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-slate-700">Gestão das Inspeções no Siclope</span>
+                            <span class="chevron text-emerald-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Garantir monitoramento e conclusão de todas as ações e inspeções.</p>
+                             <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> 100% das inspeções previstas realizadas; 100% de alto potencial sem atraso.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Pontuação:</strong> 100% = 100 Pts; 90-99% = 70 Pts; 80-89% = 50 Pts.</p>
+                        </div>
+                    </div>
+                     <!-- Item Accordion -->
+                     <div class="accordion-item bg-white rounded-lg shadow-sm border border-slate-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-slate-700">Reconhecimento</span>
+                            <span class="chevron text-emerald-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Realizar 2 reconhecimentos no mês (Melhor Informe de Desvio e Protagonista do Mês).</p>
+                             <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> 100% dos reconhecimentos realizados.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Pontuação:</strong> 100 Pontos.</p>
+                        </div>
+                    </div>
+                    <!-- Item Accordion -->
+                    <div class="accordion-item bg-white rounded-lg shadow-sm border border-slate-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-slate-700">Reconhecimento (Melhoria de Segurança)</span>
+                            <span class="chevron text-emerald-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Dar visibilidade às ações protagonistas para estimular a divulgação interna.</p>
+                             <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> Publicação da ação em Rede Social (SharePoint, LinkedIn, etc.) e em reuniões N2/N3.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Pontuação:</strong> 50 Pontos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-container space-y-3">
+                     <h3 class="text-xl font-bold text-red-800 my-4">Penalidades</h3>
+                      <!-- Item Accordion -->
+                     <div class="accordion-item bg-red-50 rounded-lg shadow-sm border border-red-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-red-700">Ocorrência de alto potencial</span>
+                            <span class="chevron text-red-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Evitar ao máximo ocorrências de alto potencial (extremo e grave).</p>
+                             <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> Zerar a ocorrência de desvios de alto potencial.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Avaliação:</strong> Penalidade de -50% sobre os pontos gerais da empresa.</p>
+                        </div>
+                    </div>
+                     <!-- Item Accordion -->
+                     <div class="accordion-item bg-red-50 rounded-lg shadow-sm border border-red-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-red-700">Fatalidade ou vida mudada</span>
+                            <span class="chevron text-red-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Evitar completamente qualquer situação que resulte em fatalidade ou vida mudada.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> Zero fatalidades ou vida mudada no período.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Avaliação:</strong> Perda total da pontuação do RMS no mês (0 Pontos).</p>
+                        </div>
+                    </div>
+                     <!-- Item Accordion -->
+                     <div class="accordion-item bg-red-50 rounded-lg shadow-sm border border-red-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-red-700">Ausência em Reuniões de Segurança (N2 e N3)</span>
+                            <span class="chevron text-red-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Assegurar a participação ativa nas reuniões de segurança.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> Participar de 100% das reuniões.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Avaliação:</strong> Ausência em 1 reunião = -50 Pontos; Ausência em 2 = -25 Pontos.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="equipes" class="content-section hidden space-y-6">
+                 <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold text-emerald-800 mb-2">Programa para Equipes Próprias</h2>
+                    <p class="text-slate-600">Aqui estão os critérios de avaliação para as equipes de colaboradores da Veracel, segmentadas por área de atuação e risco. O programa busca valorizar o desempenho coletivo, a conformidade com treinamentos, a análise de riscos e a comunicação. Explore os critérios mensais, trimestrais, bônus e penalidades para entender como sua equipe pode se destacar.</p>
+                </div>
+                
+                <div class="accordion-container space-y-3">
+                    <h3 class="text-xl font-bold text-emerald-800 my-4">Critérios Mensais</h3>
+                     <!-- Item Accordion -->
+                     <div class="accordion-item bg-white rounded-lg shadow-sm border border-slate-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-slate-700">Informes de Segurança</span>
+                            <span class="chevron text-emerald-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Registrar e monitorar desvios de condição/comportamento.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> ≥0,50 desvios per capita, com ≥95% de aprovação.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Pontuação:</strong> ≥0,50 = 30 Pts; ≥95% aprovados = 70 Pts.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-container space-y-3">
+                     <h3 class="text-xl font-bold text-emerald-800 my-4">Critérios Trimestrais</h3>
+                     <!-- Item Accordion -->
+                     <div class="accordion-item bg-white rounded-lg shadow-sm border border-slate-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-slate-700">RQA (Registro de Quase Acidente)</span>
+                            <span class="chevron text-emerald-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Registro e tratativa de RQAs.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> Pelo menos 1 RQA registrado, analisado e com ações propostas (sem atraso).</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Pontuação:</strong> 100 Pontos.</p>
+                        </div>
+                    </div>
+                    <!-- Item Accordion -->
+                     <div class="accordion-item bg-white rounded-lg shadow-sm border border-slate-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-slate-700">Treinamento de Segurança</span>
+                            <span class="chevron text-emerald-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Capacitar funcionários conforme matriz de treinamentos.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> 100% dos treinamentos de segurança cumpridos.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Pontuação:</strong> 100 Pontos.</p>
+                        </div>
+                    </div>
+                    <!-- Item Accordion -->
+                     <div class="accordion-item bg-white rounded-lg shadow-sm border border-slate-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-slate-700">% Conformidade nas Inspeções</span>
+                            <span class="chevron text-emerald-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Garantir conformidade com os padrões de segurança.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> Pelo menos 95% de conformidade nas inspeções.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Pontuação:</strong> 100 Pontos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-container space-y-3">
+                     <h3 class="text-xl font-bold text-yellow-800 my-4">Critérios Bônus</h3>
+                     <!-- Item Accordion -->
+                     <div class="accordion-item bg-yellow-50 rounded-lg shadow-sm border border-yellow-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-yellow-700">Criação de Melhores Práticas</span>
+                            <span class="chevron text-yellow-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Estimular a criação e implementação de ações proativas de melhoria.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> Registrar no SICLOPE ao menos 1 ação de melhoria.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Avaliação:</strong> Recupera até 50% de pontos perdidos em penalidades ou bônus de 5% na nota final.</p>
+                        </div>
+                    </div>
+                     <!-- Item Accordion -->
+                     <div class="accordion-item bg-yellow-50 rounded-lg shadow-sm border border-yellow-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-yellow-700">Utilização "Pare e Busque Ajuda"</span>
+                            <span class="chevron text-yellow-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Estimular o uso do direito de recusa em condições inseguras.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> Pelo menos 1 registro mensal de uso legítimo do cartão.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Pontuação:</strong> 100 Pontos.</p>
+                        </div>
+                    </div>
+                    <!-- Item Accordion -->
+                     <div class="accordion-item bg-yellow-50 rounded-lg shadow-sm border border-yellow-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-yellow-700">RQA de alto potencial analisado</span>
+                            <span class="chevron text-yellow-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Assegurar que quase acidentes de alto potencial sejam analisados e tratados.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> Garantir que toda RQA de alto potencial tenha análise e plano de ação.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Avaliação:</strong> Recupera até 50% de pontos perdidos ou bônus de 5% na nota final.</p>
+                        </div>
+                    </div>
+                    <!-- Item Accordion -->
+                     <div class="accordion-item bg-yellow-50 rounded-lg shadow-sm border border-yellow-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-yellow-700">Divulgação de Ações de Segurança</span>
+                            <span class="chevron text-yellow-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Estimular o compartilhamento de boas práticas nos canais oficiais.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> Divulgar ações e iniciativas nos canais de comunicação da empresa.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Avaliação:</strong> Pontos por cada publicação.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-container space-y-3">
+                     <h3 class="text-xl font-bold text-red-800 my-4">Penalidades</h3>
+                      <!-- Item Accordion -->
+                     <div class="accordion-item bg-red-50 rounded-lg shadow-sm border border-red-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-red-700">Ocorrência de alto potencial</span>
+                            <span class="chevron text-red-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Evitar ao máximo ocorrências de alto potencial (extremo e grave).</p>
+                             <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> Zerar a ocorrência de desvios de alto potencial.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Avaliação:</strong> Penalidade de -50% sobre os pontos gerais da empresa.</p>
+                        </div>
+                    </div>
+                     <!-- Item Accordion -->
+                     <div class="accordion-item bg-red-50 rounded-lg shadow-sm border border-red-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-red-700">Fatalidade ou vida mudada</span>
+                            <span class="chevron text-red-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Evitar completamente qualquer situação que resulte em fatalidade ou vida mudada.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Meta:</strong> Zero fatalidades ou vida mudada no período.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Avaliação:</strong> Perda total da pontuação do RMS no mês (0 Pontos).</p>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+            
+            <section id="motoristas" class="content-section hidden space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold text-emerald-800 mb-2">Programa para Motoristas</h2>
+                    <p class="text-slate-600">Esta seção é dedicada aos motoristas de veículos leves, focando em incentivar a condução segura e responsável. A avaliação é baseada em critérios como eventos de distração e respeito aos limites de velocidade, utilizando o indicador "KM Seguro" para medir a eficiência. Conheça os critérios e penalidades para garantir uma condução exemplar.</p>
+                </div>
+                <div class="accordion-container space-y-3">
+                    <h3 class="text-xl font-bold text-emerald-800 my-4">Critérios Avaliados</h3>
+                     <!-- Item Accordion -->
+                     <div class="accordion-item bg-white rounded-lg shadow-sm border border-slate-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-slate-700">Evento de Distração</span>
+                            <span class="chevron text-emerald-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Garantir condições físicas e mentais adequadas ao volante.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Regra:</strong> 1 evento = combinação de 4 tipos de risco (frenagem, curva, aceleração brusca, distração).</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Peso:</strong> 10 pontos por evento.</p>
+                        </div>
+                    </div>
+                    <!-- Item Accordion -->
+                     <div class="accordion-item bg-white rounded-lg shadow-sm border border-slate-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-slate-700">Respeito à Velocidade Máxima</span>
+                            <span class="chevron text-emerald-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Cumprir limites gerais para segurança e economia.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Regra:</strong> Penalidade se velocidade > limite geral por mais de 20s.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Peso:</strong> 5 pontos por evento.</p>
+                        </div>
+                    </div>
+                    <!-- Item Accordion -->
+                     <div class="accordion-item bg-white rounded-lg shadow-sm border border-slate-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-slate-700">Velocidade por Tipo de Estrada</span>
+                            <span class="chevron text-emerald-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Adaptar a condução aos limites específicos das vias monitoradas.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Regra:</strong> Penalidade se ultrapassar o limite da via.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Peso:</strong> 5 pontos por evento.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-emerald-800 my-4">Indicador de Desempenho</h3>
+                    <div class="bg-sky-50 border-l-4 border-sky-500 text-sky-800 p-4 rounded-r-lg" role="alert">
+                        <p class="font-bold">KM Seguro</p>
+                        <p>Mede a eficiência e segurança do motorista com base na quilometragem percorrida dividida pela soma dos pontos gerados pelos critérios de risco. Quanto maior o valor, melhor o desempenho.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-container space-y-3">
+                     <h3 class="text-xl font-bold text-red-800 my-4">Penalidades</h3>
+                      <!-- Item Accordion -->
+                     <div class="accordion-item bg-red-50 rounded-lg shadow-sm border border-red-200">
+                        <div class="accordion-header flex justify-between items-center p-4">
+                            <span class="font-semibold text-red-700">Acidente de Trânsito</span>
+                            <span class="chevron text-red-600">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-sm text-slate-600"><strong>Objetivo:</strong> Reduzir a ocorrência de acidentes.</p>
+                             <p class="text-sm text-slate-600 mt-2"><strong>Regra:</strong> Penalidade aplicada se o motorista for o causador do acidente.</p>
+                            <p class="text-sm text-slate-600 mt-2"><strong>Peso:</strong> 50 Pontos por acidente.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="protagonistas" class="content-section hidden space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold text-emerald-800 mb-2">Protagonista da Segurança</h2>
+                    <p class="text-slate-600">O reconhecimento individual celebra e incentiva o protagonismo de cada colaborador na construção de um ambiente de trabalho seguro. Ações proativas, engajamento e boas práticas são convertidas em "estrelas", que somam pontos ao longo do mês. O colaborador com a maior pontuação, validado por sua liderança, é reconhecido como o "Protagonista de Segurança do Mês".</p>
+                </div>
+                 <div>
+                    <h3 class="text-xl font-bold text-emerald-800 my-4">Reconhecimentos e Pontuação</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-xl shadow-lg text-center transform hover:scale-105 transition-transform duration-300">
+                            <div class="text-5xl mb-2 text-yellow-400">⭐⭐⭐⭐⭐⭐</div>
+                            <h4 class="font-bold text-lg text-emerald-800">Boas Práticas e Lições Aprendidas</h4>
+                            <p class="text-sm text-slate-500 mt-2">Registro com plano de ação e evidência de implantação de melhorias.</p>
+                            <div class="mt-4 font-black text-2xl text-emerald-600">6 Pontos</div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg text-center transform hover:scale-105 transition-transform duration-300">
+                             <div class="text-5xl mb-2 text-yellow-400">⭐⭐⭐⭐⭐</div>
+                            <h4 class="font-bold text-lg text-emerald-800">Protagonista em Segurança</h4>
+                            <p class="text-sm text-slate-500 mt-2">Comprometimento visível e influência positiva sobre a equipe.</p>
+                            <div class="mt-4 font-black text-2xl text-emerald-600">5 Pontos</div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg text-center transform hover:scale-105 transition-transform duration-300">
+                             <div class="text-5xl mb-2 text-yellow-400">⭐⭐⭐⭐</div>
+                            <h4 class="font-bold text-lg text-emerald-800">Cuidado Ativo</h4>
+                            <p class="text-sm text-slate-500 mt-2">Ação que mitiga diretamente um risco de acidente de forma voluntária.</p>
+                            <div class="mt-4 font-black text-2xl text-emerald-600">4 Pontos</div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg text-center transform hover:scale-105 transition-transform duration-300">
+                             <div class="text-5xl mb-2 text-yellow-400">⭐⭐⭐</div>
+                            <h4 class="font-bold text-lg text-emerald-800">Pare e Busque Ajuda</h4>
+                            <p class="text-sm text-slate-500 mt-2">Uso legítimo do direito de recusa frente a um risco iminente.</p>
+                            <div class="mt-4 font-black text-2xl text-emerald-600">3 Pontos</div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg text-center transform hover:scale-105 transition-transform duration-300">
+                             <div class="text-5xl mb-2 text-yellow-400">⭐⭐</div>
+                            <h4 class="font-bold text-lg text-emerald-800">Engajamento</h4>
+                            <p class="text-sm text-slate-500 mt-2">Participação ativa em campanhas, blitz, treinamentos e ferramentas.</p>
+                            <div class="mt-4 font-black text-2xl text-emerald-600">2 Pontos</div>
+                        </div>
+                    </div>
+                </div>
+                 <div>
+                    <h3 class="text-xl font-bold text-emerald-800 my-4">Critérios de Seleção do Protagonista do Mês</h3>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                       <ul class="list-disc list-inside space-y-2 text-slate-700">
+                           <li>Maior pontuação acumulada no mês;</li>
+                           <li>Validação da liderança imediata;</li>
+                           <li>Comportamento alinhado aos valores de segurança da Veracel;</li>
+                           <li>Evidência de impacto real das ações registradas.</li>
+                       </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            function updateContent(hash) {
+                const targetHash = hash || '#visao-geral';
+                
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === targetHash);
+                });
+
+                contentSections.forEach(section => {
+                    section.classList.toggle('hidden', section.id !== targetHash.substring(1));
+                });
+            }
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetHash = this.getAttribute('href');
+                    history.pushState(null, null, targetHash);
+                    updateContent(targetHash);
+                    window.scrollTo(0, 0);
+                });
+            });
+
+            window.addEventListener('popstate', () => {
+                updateContent(window.location.hash);
+            });
+
+            updateContent(window.location.hash);
+
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            accordionItems.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                header.addEventListener('click', () => {
+                    item.classList.toggle('accordion-open');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
